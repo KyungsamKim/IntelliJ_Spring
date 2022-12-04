@@ -1,0 +1,58 @@
+package com.ssafy.myframework.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.servlet.mvc.Controller;
+
+import com.ssafy.myframework.data.BoardManager;
+import com.ssafy.myframework.model.Board;
+
+public class BoardController implements Controller{
+
+    private BoardManager manager;
+    
+    public BoardController() {
+        manager = BoardManager.getInstance();
+	}
+	
+	public String service(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+
+		String viewName = null;
+		
+		String act = request.getParameter("act");
+		if (act == null) act = "list";
+		switch (act) {
+		case "list":
+			viewName = list(request, response);
+			break;
+		case "write-form":
+		   viewName=  writeForm(request, response);
+			break;
+		case "write":
+		    viewName write(request, response);
+			break;
+
+		}
+	}
+
+	public void writeForm(HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+        request.getRequestDispatcher("/board/write-form.jsp").forward(request, response);
+    }
+
+    public void list(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setAttribute("list", manager.selectBoard());
+        request.getRequestDispatcher("/board/list.jsp").forward(request, response);
+    }
+
+    public void write(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Board board = new Board();
+        board.setTitle(request.getParameter("title"));
+        board.setWriter(request.getParameter("writer"));
+        manager.insertBoard(board);
+        response.sendRedirect("board?act=list");
+    }
+    
+}

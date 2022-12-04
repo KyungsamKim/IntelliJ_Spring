@@ -1,0 +1,13 @@
+package com.ssafy.annotation4;
+
+public class SingleApply {
+	
+	@SingleValue1(value="test")
+	@SingleValue2(name="test2")
+	public void apply1() {}
+	
+	
+	
+	@SingleValue1
+	public void apply2() {}
+}

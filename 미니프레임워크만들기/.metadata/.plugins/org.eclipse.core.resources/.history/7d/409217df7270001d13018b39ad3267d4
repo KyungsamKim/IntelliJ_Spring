@@ -1,0 +1,6 @@
+package com.ssafy.annotation1;
+
+public @interface MyType {
+	
+	Class<?> classType();
+}

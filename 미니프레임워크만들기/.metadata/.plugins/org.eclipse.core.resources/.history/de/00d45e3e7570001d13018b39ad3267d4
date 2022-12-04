@@ -1,0 +1,12 @@
+package com.ssafy.annotation2;
+
+public class MyTargetApply {
+	private String msg;
+
+	public void call() {
+	}
+
+	public void test(@MyTarget String msg) {
+		int val = 100;
+	}
+}

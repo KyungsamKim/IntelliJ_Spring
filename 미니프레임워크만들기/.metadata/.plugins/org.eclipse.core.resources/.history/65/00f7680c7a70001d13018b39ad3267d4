@@ -1,0 +1,9 @@
+package com.ssafy.annotation5;
+
+public class Test {
+	public static void main(String[] args) {
+		Class<?> clz = AnnoApply.class;
+		
+		ClassAnno  cA = clz.getAnnotation(ClassAnno.class);
+	}
+}

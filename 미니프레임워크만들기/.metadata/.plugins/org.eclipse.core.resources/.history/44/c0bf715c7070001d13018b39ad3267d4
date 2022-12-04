@@ -1,0 +1,30 @@
+package com.ssafy.reflection;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
+import java.lang.reflect.Type;
+
+public class Test03 {
+	public static void main(String[] args) {
+		try {
+			exam1();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//리플렉션을 이용하여 객체를 생성하였다.
+	private static void exam1() throws Exception {
+		//Dog d = new Dog(); //사실 이게 하고싶어 ㅠ
+		
+		Class<Dog> clz = Dog.class;
+		Constructor<Dog> constructor =  clz.getDeclaredConstructor();
+		Dog dog = constructor.newInstance();
+		
+//		Dog dog = Dog.class.getDeclaredConstructor().newInstance();
+		
+		dog.setName("마루");
+		System.out.println(dog.getName());
+	}
+}

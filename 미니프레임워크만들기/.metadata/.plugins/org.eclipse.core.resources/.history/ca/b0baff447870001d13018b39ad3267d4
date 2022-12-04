@@ -1,0 +1,8 @@
+package com.ssafy.annotation4;
+
+public class FullValueApply {
+	
+	
+	@FullValue(type="1", name="2", vlaue="3")
+	public void apply() {}
+}

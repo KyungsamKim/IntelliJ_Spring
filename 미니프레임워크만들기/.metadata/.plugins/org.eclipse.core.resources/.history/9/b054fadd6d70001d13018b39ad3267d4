@@ -1,0 +1,30 @@
+package com.ssafy.reflection;
+
+import java.lang.reflect.Method;
+
+public class Test02 {
+	public static void main(String[] args) {
+		try {
+			exam();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+//	클래스를 접근하는 3가지 방법
+	private static void exam() throws ClassNotFoundException {
+		Class<?> clz = Dog.class;
+		
+		System.out.println("Dog이 가지고 있는 모든 메서드를 출력해보자");
+		Method[] mArr = clz.getDeclaredMethods();
+		
+//		for(Method m : mArr) {
+//			System.out.println("메서드 이름 : " + m.getName());
+//		}
+		
+		Method m = clz.getDeclaredMethod("getAge");
+		System.out.println(m.getName());
+		
+		
+	}
+}
