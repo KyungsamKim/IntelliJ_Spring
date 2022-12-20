@@ -1,0 +1,3 @@
+INDEX VERSION 1.131+C:\SSAFY\workspace\스프링공부\JPA\이클립스\.metadata\.plugins\org.eclipse.jdt.core
+3958912238.index
+3283518912.index
