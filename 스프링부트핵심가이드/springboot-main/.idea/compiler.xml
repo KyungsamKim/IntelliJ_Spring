@@ -7,16 +7,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="rest" />
         <module name="advanced_jpa" />
+        <module name="rest" />
+        <module name="jpa (1)" />
+        <module name="jpa (2)" />
         <module name="design_pattern" />
         <module name="test" />
         <module name="chapter1" />
+        <module name="api (1)" />
         <module name="serverBox" />
         <module name="actuator" />
         <module name="security" />
-        <module name="valid_exception" />
         <module name="jpa" />
+        <module name="valid_exception" />
         <module name="hello" />
         <module name="api" />
         <module name="relationship" />
@@ -25,14 +28,17 @@
     <bytecodeTargetLevel>
       <module name="actuator" target="11" />
       <module name="advanced_jpa" target="11" />
-      <module name="api" target="11" />
+      <module name="api" target="1.8" />
+      <module name="api (1)" target="1.8" />
       <module name="chapter1" target="11" />
       <module name="chapter11_restTemplate" target="11" />
       <module name="chapter2" target="11" />
       <module name="chapter4_product" target="11" />
       <module name="design_pattern" target="11" />
-      <module name="hello" target="11" />
+      <module name="hello" target="1.8" />
       <module name="jpa" target="11" />
+      <module name="jpa (1)" target="1.8" />
+      <module name="jpa (2)" target="11" />
       <module name="relationship" target="11" />
       <module name="rest" target="11" />
       <module name="security" target="11" />
@@ -46,12 +52,15 @@
       <module name="actuator" options="-parameters" />
       <module name="advanced_jpa" options="-parameters" />
       <module name="api" options="-parameters" />
+      <module name="api (1)" options="-parameters" />
       <module name="chapter1" options="-parameters" />
       <module name="chapter11_restTemplate" options="-parameters" />
       <module name="chapter2" options="-parameters" />
       <module name="chapter4_product" options="-parameters" />
       <module name="hello" options="-parameters" />
       <module name="jpa" options="-parameters" />
+      <module name="jpa (1)" options="-parameters" />
+      <module name="jpa (2)" options="-parameters" />
       <module name="relationship" options="-parameters" />
       <module name="rest" options="-parameters" />
       <module name="security" options="-parameters" />
