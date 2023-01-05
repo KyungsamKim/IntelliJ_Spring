@@ -1,7 +1,8 @@
 package com.springboot.jpa.data.dto;
 
 // 예제 6.28
-public class ChangeProductNameDto {
+public class
+ChangeProductNameDto {
 
     private Long number;
 

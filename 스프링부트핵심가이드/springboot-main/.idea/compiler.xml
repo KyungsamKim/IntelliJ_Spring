@@ -20,8 +20,8 @@
         <module name="security" />
         <module name="jpa" />
         <module name="valid_exception" />
-        <module name="hello" />
         <module name="api" />
+        <module name="hello" />
         <module name="relationship" />
       </profile>
     </annotationProcessing>

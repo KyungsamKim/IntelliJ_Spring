@@ -23,6 +23,7 @@ public class ProductDAOImpl implements ProductDAO {
     // 예제 6.11
     @Override
     public Product insertProduct(Product product) {
+        System.out.println("product = " + product);
         Product savedProduct = productRepository.save(product);
 
         return savedProduct;
