@@ -38,7 +38,7 @@
       <module name="hello" target="1.8" />
       <module name="jpa" target="11" />
       <module name="jpa (1)" target="1.8" />
-      <module name="jpa (2)" target="11" />
+      <module name="jpa (2)" target="1.8" />
       <module name="relationship" target="11" />
       <module name="rest" target="11" />
       <module name="security" target="11" />

@@ -16,6 +16,7 @@ import org.springframework.data.domain.Sort.Order;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -29,14 +30,18 @@ class ProductRepositoryTest {
     void sortingAndPagingTest() {
         // given
         Product product1 = new Product();
-        product1.setName("펜");
+        product1.setName("pen");
         product1.setPrice(1000);
         product1.setStock(100);
         product1.setCreatedAt(LocalDateTime.now());
         product1.setUpdatedAt(LocalDateTime.now());
 
         Product product2 = new Product();
-        product2.setName("펜");
+        String name = "펜";
+//        product2.setName("펜");
+        byte[] stringByte = name.getBytes();
+        String byteToString = new String(stringByte, StandardCharsets.UTF_8);
+        product2.setName(byteToString);
         product2.setPrice(5000);
         product2.setStock(300);
         product2.setCreatedAt(LocalDateTime.now());
@@ -49,6 +54,7 @@ class ProductRepositoryTest {
         product3.setCreatedAt(LocalDateTime.now());
         product3.setUpdatedAt(LocalDateTime.now());
 
+        System.out.println("product1 = " + product1);
         Product savedProduct1 = productRepository.save(product1);
         Product savedProduct2 = productRepository.save(product2);
         Product savedProduct3 = productRepository.save(product3);
