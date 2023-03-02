@@ -19,6 +19,10 @@ import com.cos.jwtex01.config.auth.PrincipalDetails;
 import com.cos.jwtex01.model.User;
 import com.cos.jwtex01.repository.UserRepository;
 
+//시큐리티가 filter가지고 있는데 그 필터중에 BasicAuthenticationFilter라는 것이 있음.
+// 권한이나 인증이 필요한 특정 주소를 요청했을 때, 위 필터를 무조건 타게 된다.
+// JwtAuthorizationFilter 는 무조건 거치게 되어있어요. 해당 필터에서 토큰이 있는지 없는지를 검사합니다!!
+
 // 인가
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter{
 	
@@ -28,16 +32,20 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter{
 		super(authenticationManager);
 		this.userRepository = userRepository;
 	}
-	
+
+	//인증이나 권한이 필요한 주소요청이 있을때, 해당 필터를 타게 됨.
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		String header = request.getHeader(JwtProperties.HEADER_STRING);
+		//header가 있는지 확인
 		if(header == null || !header.startsWith(JwtProperties.TOKEN_PREFIX)) {
 			chain.doFilter(request, response);
                         return;
 		}
 		System.out.println("header : "+header);
+
+		//JWT 토큰 검증을 해서 정상적인 사용자인지 확인
 		String token = request.getHeader(JwtProperties.HEADER_STRING)
 				.replace(JwtProperties.TOKEN_PREFIX, "");
 		
@@ -45,13 +53,16 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter{
 		// 내가 SecurityContext에 집적접근해서 세션을 만들때 자동으로 UserDetailsService에 있는 loadByUsername이 호출됨.
 		String username = JWT.require(Algorithm.HMAC512(JwtProperties.SECRET)).build().verify(token)
 				.getClaim("username").asString();
-		
+
+		//서명이 정상적으로 됨.
 		if(username != null) {	
 			User user = userRepository.findByUsername(username);
 			
 			// 인증은 토큰 검증시 끝. 인증을 하기 위해서가 아닌 스프링 시큐리티가 수행해주는 권한 처리를 위해 
 			// 아래와 같이 토큰을 만들어서 Authentication 객체를 강제로 만들고 그걸 세션에 저장!
 			PrincipalDetails principalDetails = new PrincipalDetails(user);
+			// authentication 객체 강제로 만들기 (서명을 통해 만든 객체, 로그인해서 만든 객체 아님)
+			//jWT토큰 서명을 통해서 서명이 정상이면 Authentication객체 생성
 			Authentication authentication =
 					new UsernamePasswordAuthenticationToken(
 							principalDetails, //나중에 컨트롤러에서 DI해서 쓸 때 사용하기 편함.
