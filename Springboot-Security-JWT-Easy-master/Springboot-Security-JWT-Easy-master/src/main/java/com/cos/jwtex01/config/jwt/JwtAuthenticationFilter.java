@@ -28,13 +28,22 @@ import lombok.RequiredArgsConstructor;
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 
 	private final AuthenticationManager authenticationManager;
-	
+
+	// login 요청을 하면 , 로그인 시도를 위해서 실행되는 함수
 	// Authentication 객체 만들어서 리턴 => 의존 : AuthenticationManager
 	// 인증 요청시에 실행되는 함수 => /login
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException {
-		
+
+		// 1. username, password 받아서
+		// 2. 정상인지 로그인 시도, authenticationManager로 로그인 시도를 하면 !!
+		// PrincipalDetailsService가 호출 , loadUserByUsername()함수 실행됨.
+
+		//3. PrincipalDetails를 세션에 담고,
+		// 세션에 담지 않으면 권한 관리가 안된다. 권한 관리를 안할거면, 세션에 담을 필요 없음.
+		//4. JWT 토큰을 만들어서 응답해주면 됨.
+
 		System.out.println("JwtAuthenticationFilter : 진입");
 		
 		// request에 있는 username과 password를 파싱해서 자바 Object로 받기
@@ -67,12 +76,17 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		// 결론은 인증 프로바이더에게 알려줄 필요가 없음.
 		Authentication authentication = 
 				authenticationManager.authenticate(authenticationToken);
-		
+		// DB에 있는 username과 password가 일치한다.
+		// --> 로그인이 되었다는 뜻
 		PrincipalDetails principalDetailis = (PrincipalDetails) authentication.getPrincipal();
 		System.out.println("Authentication : "+principalDetailis.getUser().getUsername());
+		//authentication 객체가 session영역에 저장을 해야하고, 그 방법이 return 해주는 것 .
+		// 리턴의 이유는 권한 관리를 security가 대신 해주기 때문에 편하기 위해 하는 것.
+		//굳이 JWT 토큰을 사용하면서 세션을 만들 이유가 없음, 권한처리때문에 session넣어줌.
 		return authentication;
 	}
 
+	//attemptAuthentication 실행 후 인증이 정상적으로 되었을 때, 실행되는 함수.
 	// JWT Token 생성해서 response에 담아주기
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,

@@ -10,6 +10,9 @@ import com.cos.jwtex01.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
+
+// http://localhsot:8080/login 요청시 동작X formLogin disable 시켰기 때문.
+// JwtAuthentication filter에서 처리.
 @Service
 @RequiredArgsConstructor
 public class PrincipalDetailsService implements UserDetailsService{
