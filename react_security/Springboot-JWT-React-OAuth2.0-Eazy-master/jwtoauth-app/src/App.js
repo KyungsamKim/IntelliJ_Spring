@@ -15,12 +15,13 @@ function App() {
   const getUser = async () => {
     let res = await Axios.get("http://localhost:8080/user", config);
     setUser(res.data);
+    console.log("getUser");
   };
 
   return (
     <div>
       <Login />
-      <h1>/user : {user}</h1>
+      <h1>user : {user}</h1>
       <button onClick={getUser}>유저정보 가져오기</button>
     </div>
   );

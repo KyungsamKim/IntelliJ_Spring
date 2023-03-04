@@ -28,8 +28,9 @@ public class JwtCreateController {
 	@PostMapping("/oauth/jwt/google")
 	public String jwtCreate(@RequestBody Map<String, Object> data) {
 		System.out.println("jwtCreate 실행됨");
+		System.out.println(data);
 		System.out.println(data.get("profileObj"));
-		OAuthUserInfo googleUser = 
+		OAuthUserInfo googleUser =
 				new GoogleUser((Map<String, Object>)data.get("profileObj"));
 		
 		User userEntity = 
